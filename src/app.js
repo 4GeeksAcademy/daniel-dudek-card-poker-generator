@@ -8,16 +8,33 @@ import "./assets/img/4geeks.ico";
 window.onload = function() {
   generateRandomCard();
 
+  const widthInput = document.getElementById("width-input");
+  const heightInput = document.getElementById("height-input");
+  const minWidth = 100;
+  const minHeight = 240;
+
   document.getElementById("generate-btn").onclick = generateRandomCard;
 
-  document.getElementById("width-input").addEventListener("input", function() {
+  widthInput.addEventListener("blur", function() {
     const card = document.getElementById("card");
-    card.style.width = this.value;
+    const newWidth = parseInt(widthInput.value, 10);
+    if (newWidth >= minWidth) {
+      card.style.width = newWidth + "px";
+    } else {
+      alert(`El ancho debe ser al menos ${minWidth}px.`);
+      widthInput.value = "";
+    }
   });
 
-  document.getElementById("height-input").addEventListener("input", function() {
+  heightInput.addEventListener("blur", function() {
     const card = document.getElementById("card");
-    card.style.height = this.value;
+    const newHeight = parseInt(heightInput.value, 10);
+    if (newHeight >= minHeight) {
+      card.style.height = newHeight + "px";
+    } else {
+      alert(`El alto debe ser al menos ${minHeight}px.`);
+      heightInput.value = "";
+    }
   });
 
   function generateRandomCard() {
